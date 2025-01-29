@@ -36,7 +36,7 @@
 
 - **Gestión de Leads:**
   - Registro automatizado de leads provenientes de Meta Ads.
-  - Clasificación de leads según interés (ej. cursos técnicos, idiomas).
+  - Clasificación de leads según interés.
 - **Automatización de Mensajes:**
   - Respuestas automáticas iniciales en WhatsApp según el interés del usuario.
   - Plantillas de mensajes personalizables para diferentes etapas del funnel.
@@ -69,6 +69,3 @@
    - Mensajes automatizados configurados para diferentes intereses y etapas del funnel.  
 3. **Panel de Métricas:**
    - Dashboard con estadísticas sobre tasas de conversión, tiempos de respuesta y seguimiento.  
-4. **Documentación:**
-   - Manual de usuario para el equipo operativo.
-   - Guía técnica para el mantenimiento y escalabilidad futura.
