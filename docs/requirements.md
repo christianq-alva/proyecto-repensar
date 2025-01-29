@@ -48,24 +48,13 @@
 
 ---
 
-## Restricciones Técnicas
-
-- **Integraciones:** 
-  - Integración con Meta Ads y WhatsApp debe cumplir las políticas de cada plataforma.  
-- **Infraestructura:** 
-  - Se debe alojar en servidores con capacidad para manejar datos en tiempo real (opción de nube o servidores propios).  
-- **Conectividad:** 
-  - Requiere acceso a internet estable para el flujo continuo de leads y envío de mensajes.  
-- **Regulaciones:** 
-  - Cumplimiento con normativas de protección de datos personales (ej. GDPR o leyes locales).  
-
 ---
 
 ## Entregables Mínimos
 
 1. **Plataforma de Gestión de Leads:**
-   - Base de datos centralizada para registrar y gestionar leads.  
+   - Sistema centralizada para registrar y gestionar leads.  
 2. **Sistema de Automatización:**
-   - Mensajes automatizados configurados para diferentes intereses y etapas del funnel.  
+   - Mensajes configurados para diferentes intereses y etapas del funnel.  
 3. **Panel de Métricas:**
    - Dashboard con estadísticas sobre tasas de conversión, tiempos de respuesta y seguimiento.  
