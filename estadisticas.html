@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM - Estadísticas</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-6xl mx-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold">Estadísticas del CRM</h1>
+            <a href="index.html" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Volver al CRM
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-xl font-semibold mb-4">Estado de Contactos</h2>
+                <canvas id="statusChart"></canvas>
+            </div>
+            
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-xl font-semibold mb-4">Contactos por Día</h2>
+                <canvas id="timelineChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getContactStats() {
+            const contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
+            
+            // Estadísticas por estado
+            const statusStats = contacts.reduce((acc, contact) => {
+                acc[contact.estado] = (acc[contact.estado] || 0) + 1;
+                return acc;
+            }, {});
+
+            // Estadísticas por día
+            const timelineStats = contacts.reduce((acc, contact) => {
+                const date = new Date(contact.fechaCarga).toLocaleDateString();
+                acc[date] = (acc[date] || 0) + 1;
+                return acc;
+            }, {});
+
+            return { statusStats, timelineStats };
+        }
+
+        function createStatusChart(stats) {
+            const ctx = document.getElementById('statusChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: Object.keys(stats),
+                    datasets: [{
+                        data: Object.values(stats),
+                        backgroundColor: [
+                            '#60A5FA', // nuevo
+                            '#34D399', // iniciado
+                            '#FBBF24', // en proceso
+                            '#10B981', // exitoso
+                            '#EF4444', // no desea
+                            '#6B7280', // num incorrecto
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        function createTimelineChart(stats) {
+            const ctx = document.getElementById('timelineChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: Object.keys(stats),
+                    datasets: [{
+                        label: 'Contactos agregados',
+                        data: Object.values(stats),
+                        borderColor: '#60A5FA',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const { statusStats, timelineStats } = getContactStats();
+            createStatusChart(statusStats);
+            createTimelineChart(timelineStats);
+        });
+    </script>
+</body>
+</html>
