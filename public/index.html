@@ -16,28 +16,30 @@
 
 <body>
     <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar -->
-            <nav class="col-md-2 d-none d-md-block sidebar">
-                <h2 class="text-white">REPENSAR</h2>
-                <div class="sidebar-menu">
-                    <a href="#" class="boton-seleccion"><span class="text-icon-container">
-                            <i class="fa-solid fa-user"></i>Leads
-                        </span><i class="fa-solid fa-chevron-right"></i></a>
-                    <a href="#">Dashboard<i class="fa-solid fa-chevron-right"></i></a>
-                    <a href="#">Customers<i class="fa-solid fa-chevron-right"></i></a>
-                </div>
-            </nav>
-
-            <!-- Main Content -->
-            <main class="col-md-10 ms-sm-auto p-4">
-                <!-- Header Welcome -->
-                <!-- <header class="main-header">
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="col-12 col-md-2 sidebar d-flex flex-column align-items-center align-items-md-start">
+                    <h2 class="text-primary text-center text-md-start">REPENSAR</h2>
+                    <div class="sidebar-menu w-100">
+                        <a href="#" class="boton-seleccion d-flex justify-content-between">
+                            <span class="text-icon-container">
+                                <i class="fa-solid fa-user"></i> Leads
+                            </span>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </a>
+                        <a href="#">Dashboard <i class="fa-solid fa-chevron-right"></i></a>
+                        <a href="#">Customers <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                </nav>
+                <!-- Main Content -->
+                <main class="col-12 col-md-10 p-4">
+                    <!-- Header Welcome -->
+                    <!-- <header class="main-header">
                     <h3>Hello Evano 👋</h3>
                 </header> -->
 
-                <!-- Dashboard Cards -->
-                <!-- <section class="dashboard-stats">
+                    <!-- Dashboard Cards -->
+                    <!-- <section class="dashboard-stats">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="card-custom">
@@ -60,70 +62,60 @@
                     </div>
                 </section> -->
 
-                <!-- Customers Table -->
-                <section class="customers-section mt-4">
-                    <div class="row">
-                        <div class="col-6">
-                            <h4>Leads</h4>
+                    <!-- Customers Table -->
+                    <section class="customers-section mt-4">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-sm-6">
+                                <h4>Leads</h4>
+                            </div>
+                            <div class="col-12 col-sm-6 text-sm-end">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#importModal">
+                                    Importar datos
+                                </button>
+                            </div>
                         </div>
-                        <div class="col-6">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#importModal">
-                                Importar datos
-                            </button>
+                        <div class="table-responsive mt-3">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Nombres</th>
+                                        <th>Apellidos</th>
+                                        <th>Correo</th>
+                                        <th>WhatsApp</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Jane Cooper</td>
+                                        <td>Microsoft</td>
+                                        <td>(225) 555-0118</td>
+                                        <td>jane@microsoft.com</td>
+                                        <td>
+                                            <span class="boton-estado-1">Active</span>
+                                            <span class="boton-estado-2">Inactive</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Floyd Miles</td>
+                                        <td>Yahoo</td>
+                                        <td>(205) 555-0100</td>
+                                        <td>floyd@yahoo.com</td>
+                                        <td><span class="boton-estado-2">Inactive</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                    </div>
-                    <div style="border: 1px; border-radius: 20px; background-color: white; ">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Nombres</th>
-                                    <th>Apellidos</th>
-                                    <th>Correo</th>
-                                    <th>Whatsaspp</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Jane Cooper</td>
-                                    <td>Microsoft</td>
-                                    <td>(225) 555-0118</td>
-                                    <td>jane@microsoft.com</td>
-                                    <!-- <td><span class="status-active">Active</span></td> -->
-                                    <td>
-                                        <span class="boton-estado-1">Active</span>
-                                        <span class="boton-estado-2">Inactive</span>
-                                        <span class="boton-estado-1">Active</span>
-                                        <span class="boton-estado-2">Inactive</span>
-                                        <span class="boton-estado-1">Active</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Floyd Miles</td>
-                                    <td>Yahoo</td>
-                                    <td>(205) 555-0100</td>
-                                    <td>floyd@yahoo.com</td>
-                                    <td><span class="boton-estado-2">Inactive</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Floyd Miles</td>
-                                    <td>Yahoo</td>
-                                    <td>(205) 555-0100</td>
-                                    <td>floyd@yahoo.com</td>
-                                    <td><span class="boton-estado-2">Inactive</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
+                    </section>
 
-                <!-- CSV Uploader -->
+                    <!-- CSV Uploader -->
 
-            </main>
+                </main>
+            </div>
         </div>
         <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="importModalLabel">Importar datos</h5>
@@ -131,15 +123,15 @@
                     </div>
                     <div class="modal-body modal-scrollable">
                         <section class="csv-uploader mt-4">
-                            <div class="container">
+                            <div class="container-fluid">
                                 <h4>Cargador de archivos CSV</h4>
                                 <div class="upload-container">
                                     <input type="file" id="csvFile" accept=".csv" class="form-control">
-                                    <div class="buttons mt-3">
+                                    <div class="buttons mt-3 d-flex flex-column flex-sm-row gap-2">
                                         <button id="loadButton" class="btn btn-primary">Cargar CSV</button>
                                         <button id="clearButton" class="btn btn-secondary">Limpiar datos</button>
                                     </div>
-                                    <div id="tableContainer" class="mt-4"></div>
+                                    <div class="table-responsive mt-4" id="tableContainer"></div>
                                 </div>
                             </div>
                         </section>
