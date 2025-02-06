@@ -7,3 +7,29 @@ button {
     margin-right: 10px;
     cursor: pointer;
 }
+
+.boton-estado-1{
+    color: rgb(0, 135, 103, 100); 
+    border-radius: 5px;
+    background-color: rgba(38, 216, 175, 0.38);
+    padding: 2px 16px;
+    border-color: rgb(0, 176, 135, 100); 
+    border-width: 1px;
+    border-style: solid;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.boton-estado-2{
+    color: rgb(223, 4, 4, 100); 
+    border-radius: 5px;
+    background-color: rgba(255, 197, 197, 100);
+    padding: 2px 16px;
+    border-color: rgb(223, 4, 4, 100); 
+    border-width: 1px;
+    border-style: solid;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+

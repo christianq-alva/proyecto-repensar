@@ -1,6 +1,10 @@
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
+    background-color: rgb(250, 251, 255,100);
 }
 
 .container {

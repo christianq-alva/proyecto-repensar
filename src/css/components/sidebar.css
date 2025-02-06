@@ -1,17 +1,53 @@
 .sidebar {
     min-height: 100vh;
-    background-color: #343a40;
+    background-color: rgb(255, 255, 255, 100);
     padding: 20px;
 }
 
 .sidebar a {
-    color: #fff;
+    color: rgb(145, 151,179, 100);
     text-decoration: none;
-    display: block;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 14px;
+    border-radius: 8px;
+    margin: 18px;
+    display: flex; /* Usamos flexbox para organizar el contenido */
+    align-items: center; /* Centra verticalmente el texto y el ícono */
+    justify-content: space-between; /* Espacio entre el texto y el ícono */
+}
+
+.sidebar a i {
+    font-size: 1.2em; /* Mueve el ícono a la derecha */
+}
+
+.sidebar a i.fa-solid.fa-user {
+    margin-right: 10px; /* Espacio entre el ícono de la izquierda y el texto */
+}
+
+.sidebar a .text-icon-container {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar a .text-icon-container i {
+    margin-right: 8px; /* Ajustamos el margen del icono para alinearlo mejor */
+    vertical-align: middle; /* Alinea verticalmente el ícono con el texto */
 }
 
 .sidebar a:hover {
     background-color: #495057;
+    color: rgb(255, 255, 255, 100);
+}
+
+/* Falta que permanezca el cambio de color al seleccionar una opcion del menu */
+
+.boton-seleccion {
+    background-color: rgba(94, 80, 248, 1); 
+    color: white; 
+}
+
+/* Cuando se hace clic en el botón */
+.boton-seleccion:active,
+.boton-seleccion:focus {
+    background-color: rgb(94, 80, 248, 1);
+    color: white;
 }
