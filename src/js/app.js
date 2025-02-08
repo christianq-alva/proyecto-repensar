@@ -77,33 +77,105 @@ window.changeCurso = function(index, newCurso) {
     }
 };
 
-window.handleAction = function(action, index) {
+let currentMessageIndex = null;
+let currentMessageType = null;
+
+window.openMessageModal = function(type, index) {
+    currentMessageIndex = index;
+    currentMessageType = type;
+    const modal = document.getElementById('messageModal');
+    const messageSuggestions = document.getElementById('messageSuggestions');
+    const messageText = document.getElementById('messageText');
+    
+    // Clear previous suggestions
+    messageSuggestions.innerHTML = '';
+    
+    // Get message suggestions based on type
+    const suggestions = getMessageSuggestions(type);
+    
+    // Add suggestion buttons
+    suggestions.forEach(suggestion => {
+        const button = document.createElement('button');
+        button.className = 'w-full text-left p-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md transition-colors duration-200';
+        button.textContent = suggestion;
+        button.onclick = () => messageText.value = suggestion;
+        messageSuggestions.appendChild(button);
+    });
+    
+    modal.classList.remove('hidden');
+};
+
+window.closeMessageModal = function() {
+    const modal = document.getElementById('messageModal');
+    modal.classList.add('hidden');
+    currentMessageIndex = null;
+    currentMessageType = null;
+};
+
+window.sendMessage = function() {
+    if (currentMessageIndex === null || currentMessageType === null) return;
+    
+    const messageText = document.getElementById('messageText').value;
+    handleAction(currentMessageType, currentMessageIndex, messageText);
+    closeMessageModal();
+};
+
+function getMessageSuggestions(type) {
+    const suggestions = {
+        'bienvenida': [
+            '¡Hola! Bienvenido/a a nuestro curso. Estamos emocionados de tenerte con nosotros.',
+            '¡Saludos! Gracias por tu interés en nuestro curso. ¿Tienes alguna pregunta inicial?'
+        ],
+        'seguimiento': [
+            '¿Qué tal va todo con el curso? ¿Necesitas ayuda con algo en particular?',
+            'Hola, ¿cómo estás avanzando? Estamos aquí para apoyarte en lo que necesites.'
+        ],
+        'cierre-ok': [
+            '¡Felicitaciones por completar el curso! Ha sido un placer tenerte como estudiante.',
+            'Gracias por tu compromiso con el curso. ¡Te deseamos muchos éxitos!'
+        ],
+        'cierre-fail': [
+            'Lamentamos que no hayas podido continuar. ¿Hay algo en lo que podamos ayudarte?',
+            'Entendemos tu decisión. Esperamos verte en otra oportunidad.'
+        ],
+        'errado': [
+            'Parece que hay un problema con el número de contacto. ¿Podrías verificarlo?',
+            'No pudimos contactarte. ¿Podrías confirmar tu número correcto?'
+        ]
+    };
+    return suggestions[type] || [];
+};
+
+// Modify the existing handleAction function
+window.handleAction = function(action, index, customMessage = '') {
     const contacts = storageManager.getContacts();
     const contact = contacts[index];
-    const lead = new Lead(contact.nombre, contact.apellido, contact.correo, contact.whatsapp, contact.estado, contact.curso ,contact.fechaCarga);
-    console.log("curso", contact)
+    const lead = new Lead(contact.nombre, contact.apellido, contact.correo, contact.whatsapp, contact.estado, contact.curso, contact.fechaCarga);
+    
+    if (customMessage) {
+        lead.sendWhatsAppMessage(customMessage);
+    } else {
+        lead.sendWhatsAppMessage(`${lead.nombre} ${lead.apellido} - ${action}`);
+    }
+    
     switch (action) {
         case 'bienvenida':
-            lead.sendWhatsAppMessage(`${lead.nombre} ${lead.apellido} - Bienvenida`);
             lead.updateStatus('iniciado');
             break;
         case 'seguimiento':
-            lead.sendWhatsAppMessage(`${lead.nombre} ${lead.apellido} - Seguimiento`);
             lead.updateStatus('en proceso');
             break;
         case 'cierre-ok':
-            lead.sendWhatsAppMessage(`${lead.nombre} ${lead.apellido} - Cierre OK`);
             lead.updateStatus('exitoso');
             break;
         case 'cierre-fail':
-            lead.sendWhatsAppMessage(`${lead.nombre} ${lead.apellido} - Cierre Fail`);
             lead.updateStatus('no desea');
             break;
         case 'errado':
             lead.updateStatus('num incorrecto');
             break;
     }
-
+    
     contacts[index] = lead;
     storageManager.saveContacts(contacts);
     uiManager.displayContacts(contacts);
