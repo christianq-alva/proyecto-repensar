@@ -1,4 +1,65 @@
 /* src/css/components/table.css */
+.responsive-table {
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.responsive-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.responsive-table thead {
+    background-color: #f8fafc;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.responsive-table th {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #475569;
+    padding: 1rem 1.5rem;
+    text-align: left;
+    font-size: 0.875rem;
+}
+
+.responsive-table td {
+    padding: 1rem 1.5rem;
+    color: #1f2937;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.responsive-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.responsive-table tbody tr:hover {
+    background-color: #f1f5f9;
+}
+
+.responsive-table tbody tr:not(:last-child) {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+@media (max-width: 768px) {
+    .responsive-table th,
+    .responsive-table td {
+        padding: 0.75rem 1rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* Status colors */
+.status-nuevo { color: #2563eb; }
+.status-iniciado { color: #9333ea; }
+.status-en-proceso { color: #f59e0b; }
+.status-exitoso { color: #16a34a; }
+.status-no-desea { color: #dc2626; }
+.status-num-incorrecto { color: #64748b; }
+
 .estado-nuevo {
     background-color: #ffffff;
 }

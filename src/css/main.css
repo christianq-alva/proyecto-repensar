@@ -2,12 +2,14 @@
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f3f4f6;
+    min-width: 320px;
 }
 
 #main-content {
     margin-left: 300px;
-    min-width: 820px;
-    padding: 2rem;
+    padding: 1rem;
+    width: 100%;
+    transition: margin-left 0.3s ease;
 }
 
 .hidden-column {
@@ -17,13 +19,41 @@ body {
 .responsive-table {
     display: block;
     overflow-x: auto;
-    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -1rem;
+}
+
+.responsive-table table {
+    margin: 0 1rem;
 }
 
 @media (max-width: 768px) {
+    #main-content {
+        margin-left: 0;
+        padding: 1rem;
+    }
+
     .responsive-table {
-        display: block;
-        overflow-x: auto;
+        font-size: 0.875rem;
+    }
+
+    .responsive-table th,
+    .responsive-table td {
         white-space: nowrap;
+        padding: 0.5rem 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+
+    .responsive-table {
+        margin: 0 -0.5rem;
+    }
+
+    .responsive-table table {
+        margin: 0 0.5rem;
     }
 }
