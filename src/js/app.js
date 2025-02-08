@@ -3,7 +3,6 @@ import Lead from './models/Lead.js';
 import CSVManager from './core/CSVManager.js';
 import UIManager from './core/UIManager.js';
 import StorageManager from './utils/storage.js';
-import MessageModal from './components/MessageModal.js';
 
 const csvManager = new CSVManager();
 const uiManager = new UIManager();
@@ -78,22 +77,33 @@ window.changeCurso = function(index, newCurso) {
     }
 };
 
-const messageModal = new MessageModal();
-
 window.handleAction = function(action, index) {
     const contacts = storageManager.getContacts();
     const contact = contacts[index];
-    const lead = new Lead(contact.nombre, contact.apellido, contact.correo, contact.whatsapp, contact.estado, contact.curso, contact.fechaCarga);
-    
-    if (action === 'errado') {
-        lead.updateStatus('num incorrecto');
-        contacts[index] = lead;
-        storageManager.saveContacts(contacts);
-        uiManager.displayContacts(contacts);
-        return;
+    const lead = new Lead(contact.nombre, contact.apellido, contact.correo, contact.whatsapp, contact.estado, contact.curso ,contact.fechaCarga);
+    console.log("curso", contact)
+    switch (action) {
+        case 'bienvenida':
+            lead.sendWhatsAppMessage(`${lead.nombre} ${lead.apellido} - Bienvenida`);
+            lead.updateStatus('iniciado');
+            break;
+        case 'seguimiento':
+            lead.sendWhatsAppMessage(`${lead.nombre} ${lead.apellido} - Seguimiento`);
+            lead.updateStatus('en proceso');
+            break;
+        case 'cierre-ok':
+            lead.sendWhatsAppMessage(`${lead.nombre} ${lead.apellido} - Cierre OK`);
+            lead.updateStatus('exitoso');
+            break;
+        case 'cierre-fail':
+            lead.sendWhatsAppMessage(`${lead.nombre} ${lead.apellido} - Cierre Fail`);
+            lead.updateStatus('no desea');
+            break;
+        case 'errado':
+            lead.updateStatus('num incorrecto');
+            break;
     }
 
-    messageModal.showModal(action, lead);
     contacts[index] = lead;
     storageManager.saveContacts(contacts);
     uiManager.displayContacts(contacts);
