@@ -1,0 +1,20 @@
+/* src/css/utils/responsive.css */
+@media (max-width: 768px) {
+    .sidebar {
+        min-width: 100%;
+        position: static;
+        min-height: auto;
+    }
+
+    #main-content {
+        margin-left: 0;
+        min-width: 100%;
+        padding: 1rem;
+    }
+
+    .responsive-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}

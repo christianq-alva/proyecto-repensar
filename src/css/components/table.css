@@ -1,0 +1,45 @@
+/* src/css/components/table.css */
+.estado-nuevo {
+    background-color: #ffffff;
+}
+
+.estado-iniciado {
+    background-color: #93c5fd;
+}
+
+.estado-en-proceso {
+    background-color: #fcd34d;
+}
+
+.estado-exitoso {
+    background-color: #6ee7b7;
+}
+
+.estado-no-desea {
+    background-color: #fca5a5;
+}
+
+.estado-num-incorrecto {
+    background-color: #d1d5db;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f9fafb;
+    font-weight: 600;
+    color: #4b5563;
+}
+
+tr:hover {
+    background-color: #f3f4f6;
+}

@@ -1,0 +1,29 @@
+/* src/css/main.css */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f3f4f6;
+}
+
+#main-content {
+    margin-left: 300px;
+    min-width: 820px;
+    padding: 2rem;
+}
+
+.hidden-column {
+    display: none;
+}
+
+.responsive-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .responsive-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}

@@ -1,0 +1,60 @@
+/* src/css/components/sidebar.css */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-height: 100vh;
+    background-color: rgba(255, 255, 255, 1);
+    min-width: 300px;
+    z-index: 10;
+}
+
+.sidebar a {
+    text-decoration: none;
+    padding: 14px;
+    border-radius: 8px;
+    margin: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar a i {
+    font-size: 1.2em;
+}
+
+.sidebar a i.fa-solid.fa-user {
+    margin-right: 10px;
+}
+
+.sidebar a .text-icon-container {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar a .text-icon-container i {
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.sidebar a:hover {
+    background-color: #495057;
+    color: rgba(255, 255, 255, 1);
+}
+
+.boton-seleccion {
+    background-color: rgba(94, 80, 248, 1);
+    color: white;
+}
+
+.boton-seleccion:active,
+.boton-seleccion:focus {
+    background-color: rgba(94, 80, 248, 1);
+    color: white;
+}
+
+#logo {
+    background-color: rgba(94, 80, 248, 1);
+    border-radius: 0px 0px 20px 20px;
+    padding: 0.4rem;
+}

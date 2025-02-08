@@ -6,74 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRM - Estadísticas</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="../src/css/main.css" rel="stylesheet">
+    <link href="../src/css/components/sidebar.css" rel="stylesheet">
+    <link href="../src/css/components/estadisticas.css" rel="stylesheet"> <!-- Nuevo CSS para estadísticas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-
-    <style>
-        .sidebar {
-            min-height: 100vh;
-            background-color: rgb(255, 255, 255, 100);
-            min-width: 300px;
-        }
-
-        .sidebar a {
-            text-decoration: none;
-            padding: 14px;
-            border-radius: 8px;
-            margin: 18px;
-            display: flex;
-            /* Usamos flexbox para organizar el contenido */
-            align-items: center;
-            /* Centra verticalmente el texto y el ícono */
-            justify-content: space-between;
-            /* Espacio entre el texto y el ícono */
-        }
-
-        .sidebar a i {
-            font-size: 1.2em;
-            /* Mueve el ícono a la derecha */
-        }
-
-        .sidebar a i.fa-solid.fa-user {
-            margin-right: 10px;
-            /* Espacio entre el ícono de la izquierda y el texto */
-        }
-
-        .sidebar a .text-icon-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .sidebar a .text-icon-container i {
-            margin-right: 8px;
-            /* Ajustamos el margen del icono para alinearlo mejor */
-            vertical-align: middle;
-            /* Alinea verticalmente el ícono con el texto */
-        }
-
-        .sidebar a:hover {
-            background-color: #495057;
-            color: rgb(255, 255, 255, 100);
-        }
-
-        /* Falta que permanezca el cambio de color al seleccionar una opcion del menu */
-
-        .boton-seleccion {
-            background-color: rgba(94, 80, 248, 1);
-            color: white;
-        }
-
-        /* Cuando se hace clic en el botón */
-        .boton-seleccion:active,
-        .boton-seleccion:focus {
-            background-color: rgb(94, 80, 248, 1);
-            color: white;
-        }
-        #logo{
-            background-color: rgb(94, 80, 248, 1);
-            border-radius: 0px 0px 20px 20px;
-            padding: 0.4rem;
-        }
-    </style>
 </head>
 
 <body class="bg-gray-100">
@@ -81,18 +17,21 @@
         <!-- Aside -->
         <nav class="col-md-2 d-none d-md-block sidebar">
             <div class="flex items-center justify-center mb-6" id="logo">
-                <img src="./images/logo.png" alt="">
+                <img src="../src/assets/images/logo.png" alt="Logo">
             </div>
             <div class="sidebar-menu">
-                <a href="index.html"><span class="text-icon-container">
+                <a href="index.html">
+                    <span class="text-icon-container">
                         <i class="fa-solid fa-user"></i>Leads
-                    </span><i class="fa-solid fa-chevron-right"></i></a>
+                    </span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </a>
                 <a href="estadisticas.html" class="boton-seleccion">Dashboard<i class="fa-solid fa-chevron-right"></i></a>
                 <a href="#">Customers<i class="fa-solid fa-chevron-right"></i></a>
             </div>
         </nav>
         <!-- Main -->
-        <main class="w-full p-8">
+        <main id="estadisticas-content">
             <div class="flex justify-between items-center mb-6">
                 <h1 class="text-3xl font-bold">Estadísticas del CRM</h1>
                 <a href="index.html" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
@@ -100,24 +39,26 @@
                 </a>
             </div>
 
-            <div class="flex gap-6">
-                <div class="bg-white p-6 rounded-lg shadow" style="height: 80%">
-                    <h2 class="text-xl font-semibold mb-4">Estado de Contactos</h2>
+            <div class="graficos-container">
+                <div class="grafico">
+                    <h2>Estado de Contactos</h2>
                     <canvas id="statusChart"></canvas>
                 </div>
-
-                <div class="bg-white p-6 rounded-lg shadow w-full">
-                    <h2 class="text-xl font-semibold mb-4">Contactos por Día</h2>
+                <div class="grafico">
+                    <h2>Contactos por Día</h2>
                     <canvas id="timelineChart"></canvas>
                 </div>
             </div>
         </main>
     </div>
 
+    <script type="module">
+        import StorageManager from '../src/js/utils/storage.js';
 
-    <script>
+        const storageManager = new StorageManager();
+
         function getContactStats() {
-            const contacts = JSON.parse(localStorage.getItem('contacts') || '[]');
+            const contacts = storageManager.getContacts();
 
             // Estadísticas por estado
             const statusStats = contacts.reduce((acc, contact) => {

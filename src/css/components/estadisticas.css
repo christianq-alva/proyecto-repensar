@@ -1,0 +1,49 @@
+/* src/css/components/estadisticas.css */
+/* Estilos para el contenedor principal de estadísticas */
+#estadisticas-content {
+    margin-left: 300px; /* Ajuste para el sidebar */
+    padding: 2rem;
+    width: calc(100% - 300px); /* Ajuste para el ancho del sidebar */
+}
+
+/* Estilos para los gráficos */
+.graficos-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.grafico {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    flex: 1 1 calc(50% - 1rem); /* Dos gráficos por fila */
+    min-width: 300px; /* Ancho mínimo para evitar que se hagan muy pequeños */
+}
+
+/* Estilos para el título de los gráficos */
+.grafico h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #374151;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    #estadisticas-content {
+        margin-left: 0;
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .graficos-container {
+        flex-direction: column;
+    }
+
+    .grafico {
+        flex: 1 1 100%; /* Un gráfico por fila en móviles */
+    }
+}
