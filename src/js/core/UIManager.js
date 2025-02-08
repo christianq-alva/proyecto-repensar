@@ -15,22 +15,23 @@ UIManager.prototype.displayContacts = function(contacts, statusFilter = '', curs
     filteredContacts.forEach((contact, index) => {
         console.log(contact)
         const row = document.createElement('tr');
-        row.className = this.getStatusClass(contact.estado);
         row.innerHTML = `
-            <td class="px-4 md:px-6 py-4 whitespace-nowrap">${contact.nombre}</td>
-            <td class="px-4 md:px-6 py-4 whitespace-nowrap">${contact.apellido}</td>
-            <td class="px-4 md:px-6 py-4 whitespace-nowrap">${contact.correo}</td>
-            <td class="px-4 md:px-6 py-4 whitespace-nowrap">${contact.whatsapp}</td>
-            <td class="px-4 md:px-6 py-4 whitespace-nowrap">${contact.estado}</td>
-            <td class="px-4 md:px-6 py-4 whitespace-nowrap">${contact.curso || "Curso no asignado"}</td> <!-- Validación aquí -->
+            <td class="px-4 md:px-6 py-4 whitespace-nowrap text-sm">${contact.nombre}</td>
+            <td class="px-4 md:px-6 py-4 whitespace-nowrap text-sm">${contact.apellido}</td>
+            <td class="px-4 md:px-6 py-4 whitespace-nowrap text-sm">${contact.correo}</td>
+            <td class="px-4 md:px-6 py-4 whitespace-nowrap text-sm">${contact.whatsapp}</td>
+            <td class="px-4 md:px-6 py-4 whitespace-nowrap text-sm">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium ${this.getStatusButtonClass(contact.estado)}">${contact.estado}</span>
+            </td>
+            <td class="px-4 md:px-6 py-4 whitespace-nowrap text-sm">${contact.curso || "Sin asignar"}</td>
             <td class="px-4 md:px-6 py-4 whitespace-nowrap">
-                <div class="flex flex-wrap gap-2">
-                    <button onclick="handleAction('bienvenida', ${index})" class="bg-blue-500 text-white px-2 py-1 rounded text-sm">Bienvenida</button>
-                    <button onclick="handleAction('seguimiento', ${index})" class="bg-yellow-500 text-white px-2 py-1 rounded text-sm">Seguimiento</button>
-                    <button onclick="handleAction('cierre-ok', ${index})" class="bg-green-500 text-white px-2 py-1 rounded text-sm">Cierre OK</button>
-                    <button onclick="handleAction('cierre-fail', ${index})" class="bg-red-500 text-white px-2 py-1 rounded text-sm">Cierre Fail</button>
-                    <button onclick="handleAction('errado', ${index})" class="bg-gray-500 text-white px-2 py-1 rounded text-sm">Errado</button>
-                    <select onchange="changeCurso(${index}, this.value)" class="border rounded px-2 py-1 text-sm">
+                <div class="flex flex-wrap gap-1.5">
+                    <button onclick="handleAction('bienvenida', ${index})" class="inline-flex items-center px-2 py-1 text-xs font-medium rounded-md text-blue-700 bg-blue-50 hover:bg-blue-100 transition-colors duration-200">Bienvenida</button>
+                    <button onclick="handleAction('seguimiento', ${index})" class="inline-flex items-center px-2 py-1 text-xs font-medium rounded-md text-yellow-700 bg-yellow-50 hover:bg-yellow-100 transition-colors duration-200">Seguimiento</button>
+                    <button onclick="handleAction('cierre-ok', ${index})" class="inline-flex items-center px-2 py-1 text-xs font-medium rounded-md text-green-700 bg-green-50 hover:bg-green-100 transition-colors duration-200">Cierre OK</button>
+                    <button onclick="handleAction('cierre-fail', ${index})" class="inline-flex items-center px-2 py-1 text-xs font-medium rounded-md text-red-700 bg-red-50 hover:bg-red-100 transition-colors duration-200">Cierre Fail</button>
+                    <button onclick="handleAction('errado', ${index})" class="inline-flex items-center px-2 py-1 text-xs font-medium rounded-md text-gray-700 bg-gray-50 hover:bg-gray-100 transition-colors duration-200">Errado</button>
+                    <select onchange="changeCurso(${index}, this.value)" class="text-xs border rounded-md px-2 py-1 text-gray-700 bg-gray-50 hover:bg-gray-100 transition-colors duration-200">
                         <option value="">Cambiar Curso</option>
                         <option value="Diseño">Diseño</option>
                         <option value="UI">UI</option>
@@ -38,22 +39,22 @@ UIManager.prototype.displayContacts = function(contacts, statusFilter = '', curs
                     </select>
                 </div>
             </td>
-            <td class="hidden-column">${this.formatDate(contact.fechaCarga)}</td>
+            <td class="hidden-column text-sm">${this.formatDate(contact.fechaCarga)}</td>
         `;
         tableBody.appendChild(row);
     });
 };
 
-UIManager.prototype.getStatusClass = function(status) {
+UIManager.prototype.getStatusButtonClass = function(status) {
     const statusMap = {
-        'nuevo': 'estado-nuevo',
-        'iniciado': 'estado-iniciado',
-        'en proceso': 'estado-en-proceso',
-        'exitoso': 'estado-exitoso',
-        'no desea': 'estado-no-desea',
-        'num incorrecto': 'estado-num-incorrecto'
+        'nuevo': 'text-blue-700 bg-blue-50',
+        'iniciado': 'text-yellow-700 bg-yellow-50',
+        'en proceso': 'text-yellow-700 bg-yellow-50',
+        'exitoso': 'text-green-700 bg-green-50',
+        'no desea': 'text-red-700 bg-red-50',
+        'num incorrecto': 'text-gray-700 bg-gray-50'
     };
-    return statusMap[status] || 'estado-nuevo';
+    return statusMap[status] || 'text-blue-700 bg-blue-50';
 };
 
 UIManager.prototype.formatDate = function(dateString) {
